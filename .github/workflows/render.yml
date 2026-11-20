@@ -1,28 +1,52 @@
-name: Renderizar video de ejemplo
+name: Renderizar comercial ReciclaRed
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/render.yml'
+      - 'src/**'
+      - 'package.json'
+      - 'remotion.config.ts'
+
+permissions:
+  contents: write
 
 jobs:
   render:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
-      - name: Descargar el código
+      - name: Descargar proyecto
         uses: actions/checkout@v4
-      - name: Preparar Node.js
+      - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Instalar dependencias
-        run: npm install
+      - name: Instalar Remotion
+        run: npm install --no-audit --no-fund
       - name: Comprobar TypeScript
         run: npx tsc --noEmit
+      - name: Instalar librerías del navegador
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnspr4 libnss3 libatk-bridge2.0-0 libatk1.0-0 libx11-xcb1 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2t64 libpango-1.0-0 libcairo2 libxkbcommon0
       - name: Renderizar MP4
         run: npm run render
-      - name: Guardar video
+      - name: Publicar MP4 correcto en GitHub
+        run: |
+          cp out/video.mp4 out/reciclared-demo.mp4
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f out/reciclared-demo.mp4
+          if ! git diff --cached --quiet; then
+            git commit -m "Renderizar video ReciclaRed [skip ci]"
+            git push
+          fi
+      - name: Adjuntar video descargable
         uses: actions/upload-artifact@v4
         with:
-          name: video-mp4
+          name: reciclared-video
           path: out/video.mp4
           if-no-files-found: error
