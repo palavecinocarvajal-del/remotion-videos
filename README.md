@@ -1,45 +1,42 @@
-# Remotion Videos
+# Remotion Videos — ReciclaRed
 
-Proyecto de videos programáticos con **React + Remotion**. Incluye una composición animada de ejemplo de 5 segundos en formato Full HD (1920 × 1080 a 30 fps).
+Proyecto de producción audiovisual usando React y Remotion.
 
-## Requisitos
+## Video de prueba terminado
 
-- Node.js 22 o superior
-- npm
+- **Archivo:** [Descargar comercial de ReciclaRed (MP4)](out/reciclared-demo.mp4)
+- **Formato:** vertical, 1080 × 1920, 30 fps
+- **Duración:** 10 segundos
+- **Contenido:** animaciones tipográficas sobre reutilización de dispositivos y servicios de ReciclaRed
+- **Audio:** sin audio
+- **Diseño:** demostración preliminar, no utiliza el logotipo oficial ni imágenes propias de la empresa.
 
-## Ejecutar Remotion Studio
+## Ejecutar localmente
+
+Instala Node.js 22 o superior y luego ejecuta:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Se abrirá Remotion Studio en el navegador de tu computador para editar y previsualizar el video.
-
-## Exportar un video MP4
+Para renderizar:
 
 ```bash
 npm run render
 ```
 
-El archivo se guardará en `out/video.mp4`.
+Esto creará `out/video.mp4`.
 
-## Generar el MP4 desde GitHub
+## Renderizar desde GitHub Actions
 
-También puedes generar el video sin instalar nada en tu equipo:
+Abre **Actions → Renderizar video de ejemplo → Run workflow**. La ejecución instalará las dependencias en GitHub y subirá el MP4 como artefacto descargable, si el proceso termina correctamente.
 
-1. Abre la pestaña **Actions** de este repositorio.
-2. Entra a **Renderizar video de ejemplo** y pulsa **Run workflow**.
-3. Cuando finalice correctamente, abre la ejecución y descarga el artefacto `video-mp4`.
+## Código
 
-El flujo instala las dependencias en el entorno temporal de GitHub Actions y renderiza el ejemplo. El resultado solo estará disponible cuando la ejecución termine con éxito.
+- `src/Presentacion.tsx`: escenas, textos y animaciones
+- `src/Root.tsx`: resolución, duración y FPS
+- `src/index.ts`: entrada de Remotion
+- `.github/workflows/render.yml`: exportación desde GitHub
 
-## Archivos principales
-
-- `src/index.ts`: punto de entrada de Remotion.
-- `src/Root.tsx`: registro de composiciones.
-- `src/Presentacion.tsx`: animación del video.
-- `remotion.config.ts`: configuración del render.
-- `.github/workflows/render.yml`: flujo para exportar MP4 mediante GitHub Actions.
-
-**Importante:** GitHub almacena el código; no mantiene Remotion Studio ejecutándose permanentemente. Para editar de forma interactiva debes iniciar el Studio en un equipo o entorno de desarrollo compatible.
+Para edición de imagen, audio, música y corrección de color final se puede usar DaVinci Resolve más adelante. GitHub no ejecuta permanentemente una aplicación de edición.
