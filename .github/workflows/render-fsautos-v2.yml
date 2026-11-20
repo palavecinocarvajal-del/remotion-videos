@@ -1,0 +1,32 @@
+name: Renderizar FS AUTOS V2
+
+on:
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Verificar archivos de video y logo
+        run: |
+          test -s public/fsautos/34345.mp4 || { echo "::error::Falta el video original en public/fsautos/34345.mp4"; exit 1; }
+          test -s public/fsautos/logo-fs-autos.png || { echo "::error::Falta el logo en public/fsautos/logo-fs-autos.png"; exit 1; }
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar dependencias
+        run: npm install
+      - name: Revisar TypeScript
+        run: npx tsc --noEmit
+      - name: Renderizar reel
+        run: npm run render:fsautos-v2
+      - name: Subir MP4 descargable
+        uses: actions/upload-artifact@v4
+        with:
+          name: FS_AUTOS_Reel_V2
+          path: out/FS_AUTOS_Reel_Dinamico_v2.mp4
+          if-no-files-found: error
