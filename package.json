@@ -6,6 +6,7 @@
     "dev": "remotion studio",
     "studio": "remotion studio",
     "render": "remotion render src/index.ts Presentacion out/video.mp4",
+    "render:fsautos": "remotion render src/index.ts FSAutos out/FS_AUTOS_publicidad.mp4 --codec h264",
     "compositions": "remotion compositions src/index.ts"
   },
   "dependencies": {
