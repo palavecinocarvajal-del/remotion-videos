@@ -1,0 +1,28 @@
+name: Renderizar video de ejemplo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar dependencias
+        run: npm install
+      - name: Comprobar TypeScript
+        run: npx tsc --noEmit
+      - name: Renderizar MP4
+        run: npm run render
+      - name: Guardar video
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-mp4
+          path: out/video.mp4
+          if-no-files-found: error
