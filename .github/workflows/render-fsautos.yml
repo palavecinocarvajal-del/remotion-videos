@@ -1,0 +1,33 @@
+name: Renderizar FS AUTOS (Reel)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Verificar recursos multimedia
+        run: |
+          for file in bmw-carretera.mp4 bmw-animacion.mp4 bmw-cierre.png logo-fs-autos.png; do
+            test -s "public/fsautos/$file" || { echo "::error::Falta public/fsautos/$file (ver docs/FS_AUTOS.md)"; exit 1; }
+          done
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar paquetes
+        run: npm install
+      - name: Validar código
+        run: npx tsc --noEmit
+      - name: Exportar MP4
+        run: npm run render:fsautos
+      - name: Guardar archivo
+        uses: actions/upload-artifact@v4
+        with:
+          name: FS_AUTOS_Reel_MP4
+          path: out/FS_AUTOS_publicidad.mp4
+          if-no-files-found: error
