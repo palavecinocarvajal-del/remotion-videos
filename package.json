@@ -6,7 +6,9 @@
     "dev": "remotion studio",
     "studio": "remotion studio",
     "render": "remotion render src/index.ts Presentacion out/video.mp4",
-    "compositions": "remotion compositions src/index.ts"
+    "render:fsautos": "remotion render src/index.ts FSAutos out/FS_AUTOS_publicidad.mp4 --codec h264",
+    "compositions": "remotion compositions src/index.ts",
+    "render:fsautos-v2": "remotion render src/index.ts FSAutosV2 out/FS_AUTOS_Reel_Dinamico_v2.mp4 --codec h264"
   },
   "dependencies": {
     "@remotion/cli": "4.0.545",
