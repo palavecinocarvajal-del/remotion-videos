@@ -47,12 +47,19 @@ const Closing:React.FC=()=>{
  const f=useCurrentFrame(),o=interpolate(f,[0,12],[0,1],{extrapolateLeft:'clamp',extrapolateRight:'clamp'});
  return <AbsoluteFill style={{opacity:o,fontFamily:'Arial,Helvetica,sans-serif',color:WHITE}}>
   <AbsoluteFill style={{background:'linear-gradient(180deg,rgba(2,10,20,.3) 0%,rgba(2,10,20,.25) 32%,rgba(2,10,20,.95) 80%,#020b13 100%)'}}/>
-  <Img src={staticFile('fsautos/logo-fs-autos.png')} style={{position:'absolute',top:94,left:130,width:820,height:300,objectFit:'contain'}}/>
+  <Img src={staticFile('fsautos/logo-fs-autos.png')} style={{position:'absolute',top:94,left:130,width:820,height:300,objectFit:'contain',mixBlendMode:'screen',filter:'drop-shadow(0 0 12px rgba(0,184,219,0.12))'}}/>
   <div style={{position:'absolute',bottom:360,left:60,right:60,textAlign:'center',fontWeight:900}}>
    <div style={{fontSize:104}}>QUEREMOS</div><div style={{fontSize:109}}>COMPRAR</div><div style={{fontSize:123,color:BLUE}}>TU AUTO</div>
   </div>
   <div style={{position:'absolute',bottom:156,left:90,right:90,padding:'30px 0',borderRadius:19,textAlign:'center',fontSize:57,fontWeight:900,background:BLUE,color:'#02141e'}}>ESCRÍBENOS HOY</div>
-  <div style={{position:'absolute',bottom:68,left:40,right:40,textAlign:'center',fontSize:43}}>WhatsApp  +56 9 7715 2253</div>
+  <div style={{position:'absolute',bottom:68,left:40,right:40,display:'flex',alignItems:'center',justifyContent:'center',gap:18,fontSize:43,fontWeight:800}}>
+    <svg width="52" height="52" viewBox="0 0 64 64" aria-label="WhatsApp">
+      <path fill="#25D366" d="M32 5a27 27 0 0 0-23.4 40.5L5 59l14-3.6A27 27 0 1 0 32 5z"/>
+      <path fill="#fff" d="M32 11a21 21 0 0 0-18.1 31.7l-2.3 8.8 9.1-2.3A21 21 0 1 0 32 11zm0 37a16 16 0 0 1-8.3-2.2l-1.2-.7-5.3 1.4 1.4-5.2-.8-1.2A16 16 0 1 1 32 48z"/>
+      <path fill="#fff" d="M24 21c-1 0-1.9.4-2.5 1.1-1.2 1.5-2.4 3.5-2.4 5.8 0 2.5 1.8 5.8 4.5 8.5 2.9 3 6 4.5 9.7 5.2 2.7.6 4.6.5 6.3-.6 1.6-1 2.7-2.5 3-4.2.1-.5 0-1-.6-1.3l-5-2.4c-.7-.3-1.1-.1-1.6.5l-2 2.2c-.4.5-.8.6-1.5.3a17 17 0 0 1-5-3.1 19 19 0 0 1-3.5-4.4c-.4-.6 0-.9.3-1.2l1.5-1.7c.4-.5.5-.9.2-1.5l-2.1-5c-.3-.7-.7-1.1-1.4-1.1z"/>
+    </svg>
+    <span>+56 9 7715 2253</span>
+  </div>
  </AbsoluteFill>;
 };
 
